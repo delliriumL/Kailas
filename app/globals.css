@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0D0D0D;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Brand: Forest Teal (primary #1A8F7D, hover #157A6B) + companion tokens ─── */
+:root {
+  --accent: #1a8f7d;
+  --accent-hover: #157a6b;
+  --accent-soft: #2db5a0;
+  --grad-fire: linear-gradient(119.49deg, #157a6b 12.98%, #1a8f7d 52%, #2db5a0 100%);
+  --grad-fire-hover: linear-gradient(119.49deg, #126b5f 12.98%, #157a6b 52%, #26a090 100%);
+  --grad-fire-90: linear-gradient(90deg, #157a6b 0%, #1a8f7d 55%, #2db5a0 100%);
+  --text-secondary: #5c6b7a;
+  --text-secondary-muted: #6b7c8f;
+  --border-subtle: rgba(92, 107, 122, 0.2);
+  --surface-tint: #f2f6f5;
+  --surface-deep: #0e1615;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 text-white font-semibold px-7 py-3.5 text-[15px] transition-all duration-200 hover:-translate-y-0.5;
+    background: var(--accent);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-white text-white font-semibold px-7 py-3.5 text-[15px] transition-all duration-200 hover:bg-white hover:text-dark;
+  }
+
+  /* Same shape as btn-outline, for light backgrounds (cases, blog «Загрузить ещё») */
+  .btn-outline-light {
+    @apply inline-flex items-center gap-2 border-2 border-dark/20 text-dark font-semibold px-7 py-3.5 text-[15px] transition-all duration-200 hover:bg-orange hover:border-orange hover:text-white;
+  }
+
+  .btn-outline-orange {
+    @apply inline-flex items-center gap-2 border-2 font-semibold px-7 py-3.5 text-[15px] transition-all duration-200;
+    border-color: var(--accent);
+    color: #8fd9cc;
+  }
+  .btn-outline-orange:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .container-xl {
+    @apply max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16;
+  }
+
+  .card-dark {
+    @apply bg-dark-card rounded-sm p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl border border-dark-muted/30;
+  }
+
+  .card-light {
+    @apply bg-white rounded-sm p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-light-secondary;
+  }
+
+  .orange-left-border {
+    @apply pl-4;
+    border-left: 4px solid var(--accent);
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold tracking-[0.2em] uppercase mb-4;
+    color: var(--accent-soft);
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+
+  .nav-link {
+    @apply text-white/80 hover:text-white text-sm font-medium transition-colors duration-200;
+  }
+
+  .breadcrumb-link {
+    @apply text-white/50 hover:text-white text-sm transition-colors;
+  }
+
+  .circle-arrow {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:scale-110 flex-shrink-0;
+    background: var(--accent);
+  }
+
+  /* Reusable gradient bar (progress bars, separators) */
+  .progress-fire {
+    background: var(--grad-fire) !important;
+  }
+}
+
+/* Ticker animation */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-wrap {
+  overflow: hidden;
+}
+
+.ticker-content {
+  display: flex;
+  width: max-content;
+  animation: ticker 35s linear infinite;
+}
+
+/* Hero right column — scanning atmosphere line */
+@keyframes hero-scan {
+  0%   { top: -5%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { top: 105%; opacity: 0; }
+}
+.hero-scan-line {
+  animation: hero-scan 10s ease-in-out infinite;
+}
+
+/* Hero dots — subtle breathing glow */
+@keyframes dot-breathe {
+  0%, 100% { box-shadow: 0 0 4px rgba(26, 143, 125, 0.35); }
+  50%      { box-shadow: 0 0 12px rgba(26, 143, 125, 0.55); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1A1A1A;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #157a6b, #1a8f7d);
+  border-radius: 0;
+}
+
+/* Prose styles */
+.prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0D0D0D;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+.prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0D0D0D;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.prose ul {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+.prose li {
+  color: var(--text-secondary);
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+.prose li::before {
+  content: '·';
+  color: var(--accent-soft);
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+.prose strong {
+  font-weight: 600;
+  color: #0D0D0D;
+}

@@ -72,12 +72,28 @@ const allPosts = [
 
 const PAGE_SIZE = 3
 
+const blogFilters = [
+  'Все',
+  ...Array.from(new Set(allPosts.map((p) => p.category))).sort((a, b) => a.localeCompare(b, 'ru')),
+]
+
 export default function BlogPage() {
+  const [active, setActive] = useState('Все')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
-  const featured = allPosts.find(p => p.featured)
-  const rest = allPosts.filter(p => !p.featured)
-  const visiblePosts = rest.slice(0, visibleCount)
-  const hasMore = visibleCount < rest.length
+
+  const featured = allPosts.find((p) => p.featured)
+  const rest = allPosts.filter((p) => !p.featured)
+  const restFiltered = active === 'Все' ? rest : rest.filter((p) => p.category === active)
+  const visiblePosts = restFiltered.slice(0, visibleCount)
+  const hasMore = visibleCount < restFiltered.length
+
+  const showFeatured =
+    featured != null && (active === 'Все' || featured.category === active)
+
+  function handleFilter(f: string) {
+    setActive(f)
+    setVisibleCount(PAGE_SIZE)
+  }
 
   return (
     <div className="bg-white">
@@ -89,7 +105,7 @@ export default function BlogPage() {
       />
 
       {/* Featured post */}
-      {featured && (
+      {showFeatured && featured && (
         <section className="border-b border-light-secondary bg-white">
           <div className="container-xl py-16">
             <FadeIn>
@@ -141,11 +157,32 @@ export default function BlogPage() {
       <section className="section-padding bg-white">
         <div className="container-xl">
           <FadeIn>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {blogFilters.map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => handleFilter(f)}
+                  className={`px-5 py-2 text-sm font-medium transition-all duration-200 ${
+                    active === f
+                      ? 'bg-orange text-white'
+                      : 'border border-dark/20 text-dark/50 hover:border-orange hover:text-orange'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
             <h2 className="text-2xl font-bold text-dark mb-8">Все публикации</h2>
           </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {visiblePosts.map((post, i) => (
+            {visiblePosts.length === 0 ? (
+              <FadeIn>
+                <p className="text-dark/50 col-span-full">В этой категории пока нет материалов в списке ниже.</p>
+              </FadeIn>
+            ) : (
+            visiblePosts.map((post, i) => (
               <FadeIn key={post.slug} delay={i * 0.08} className="h-full">
                 <Link
                   href={`/blog/${post.slug}`}
@@ -174,7 +211,8 @@ export default function BlogPage() {
                   </div>
                 </Link>
               </FadeIn>
-            ))}
+            ))
+            )}
           </div>
 
           {/* Load more */}

@@ -143,7 +143,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.12 }}
-            className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg"
+            className="mx-auto mt-5 sm:mt-6 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base lg:text-lg"
           >
             Налоги, суды, банкротство и AI — одна команда: сначала карта рисков и сроки, затем стратегия без
             шаблонов.
@@ -153,9 +153,9 @@ function HeroSection() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.2 }}
-            className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"
+            className="mt-7 sm:mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"
           >
-            <Link href="/contacts" className="btn-primary text-base px-8 py-4">
+            <Link href="/contacts" className="btn-primary text-sm px-6 py-3 sm:text-base sm:px-8 sm:py-4 w-full sm:w-auto justify-center">
               Экстренная диагностика
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -163,7 +163,7 @@ function HeroSection() {
             </Link>
             <Link
               href="/calculator"
-              className="btn-outline text-base px-8 py-4 border-white/70 hover:border-white"
+              className="btn-outline text-sm px-6 py-3 sm:text-base sm:px-8 sm:py-4 border-white/70 hover:border-white w-full sm:w-auto justify-center"
             >
               Оценить стоимость →
             </Link>
@@ -173,7 +173,7 @@ function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mx-auto mt-10 max-w-2xl text-sm leading-relaxed text-slate-400"
+            className="mx-auto mt-7 sm:mt-10 max-w-2xl text-xs leading-relaxed text-slate-400 sm:text-sm"
           >
             {trustStats.map((s) => `${s.label} ${s.sub}`).join(' · ')}
           </motion.p>
@@ -232,9 +232,9 @@ function CasesCarousel() {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-0 items-stretch" style={{ height: '460px' }}>
-          {/* Left: Photo + metric */}
-          <div className="lg:col-span-2 relative overflow-hidden h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-0 lg:h-[460px] items-stretch">
+          {/* Left: Photo + metric — скрыт на мобильных */}
+          <div className="hidden lg:block lg:col-span-2 relative overflow-hidden h-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={slide.id}
@@ -289,9 +289,9 @@ function CasesCarousel() {
             </div>
           </div>
 
-          {/* Right: Quote (scroll) + фиксированные стрелки внизу */}
-          <div className="bg-dark-card p-8 lg:p-10 flex flex-col h-full min-h-0 overflow-hidden">
-            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.2)_transparent]">
+          {/* Right: Quote + фиксированные стрелки — на мобильных full width */}
+          <div className="bg-dark-card p-6 sm:p-8 lg:p-10 flex flex-col lg:h-full min-h-0 overflow-hidden">
+            <div className="lg:flex-1 lg:min-h-0 lg:overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.2)_transparent]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`quote-${slide.id}`}
@@ -546,8 +546,8 @@ export default function HomePage() {
               </div>
             </FadeIn>
 
-            {/* Stats panel */}
-            <FadeIn delay={0.2} direction="right">
+            {/* Stats panel — скрыт на мобильных */}
+            <FadeIn delay={0.2} direction="right" className="hidden md:block">
               <div className="bg-surface-deep p-10 rounded-sm border border-ink/10">
                 <p className="text-center text-xs font-bold uppercase tracking-widest text-white/85 mb-8">
                   Доказательства в цифрах
@@ -680,7 +680,7 @@ export default function HomePage() {
                 href={`/blog/${blogPosts[0].slug}`}
                 className="flex flex-col bg-white h-full overflow-hidden border border-light-secondary transition-colors hover:border-orange/25 group"
               >
-                <div className="relative aspect-video overflow-hidden bg-dark-secondary flex-shrink-0">
+                <div className="relative aspect-[2/1] overflow-hidden bg-dark-secondary flex-shrink-0 lg:aspect-video">
                   <Image
                     src={blogPosts[0].image || '/images/cases/case-1.jpg'}
                     alt={blogPosts[0].title}
@@ -695,10 +695,10 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="p-6 sm:p-8 flex-1 flex flex-col">
-                  <h3 className="text-dark font-bold text-xl sm:text-2xl mb-3 leading-tight group-hover:text-orange transition-colors">
+                  <h3 className="text-dark font-bold text-lg sm:text-xl lg:text-2xl mb-3 leading-tight group-hover:text-orange transition-colors max-lg:line-clamp-4">
                     {blogPosts[0].title}
                   </h3>
-                  <p className="text-ink text-sm sm:text-base leading-relaxed mb-5 flex-1">
+                  <p className="text-ink text-sm sm:text-base lg:text-[17px] lg:leading-relaxed mb-5 flex-1 max-lg:line-clamp-4 lg:line-clamp-none">
                     {blogPosts[0].featuredExcerpt ?? blogPosts[0].excerpt}
                   </p>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted text-xs border-t border-ink/15 pt-4 mt-auto">
@@ -710,67 +710,57 @@ export default function HomePage() {
               </Link>
             </FadeIn>
 
-            {/* Smaller posts stacked */}
-            <div className="flex flex-col gap-4 h-full">
+            {/* Два поста справа: на lg верх ~2/3 высоты колонки, низ ~1/3 */}
+            <div className="grid h-full min-h-0 gap-4 grid-rows-[auto_auto] lg:grid-rows-[minmax(0,2fr)_minmax(0,1fr)]">
               {blogPosts.slice(1, 3).map((post, i) => {
-                const noImageHome = post.slug === 'zashchita-ot-subsidiarnoy-otvetstvennosti'
+                const isBottom = i === 1
                 const cardShell =
                   'flex flex-col bg-white h-full min-h-0 overflow-hidden border border-light-secondary transition-colors hover:border-orange/25 group'
                 return (
-                  <FadeIn key={post.slug} delay={i * 0.1} className="flex-1">
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className={`${cardShell}${noImageHome ? ' min-h-[200px] sm:min-h-0' : ''}`}
-                    >
-                      {noImageHome ? (
-                        <>
-                          <div className="p-6 flex flex-col flex-1">
-                            <span className="inline-block self-start bg-orange text-white text-xs font-semibold px-3 py-1 tracking-wide mb-4">
-                              {post.category}
-                            </span>
-                            <h3 className="text-dark font-bold text-lg mb-3 leading-snug group-hover:text-orange transition-colors">
-                              {post.title}
-                            </h3>
-                            <p className="text-ink text-sm leading-relaxed mb-5 flex-1 line-clamp-4 sm:line-clamp-3">
-                              {post.excerpt}
-                            </p>
-                            <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted text-xs border-t border-ink/15 pt-4">
-                              <span>Статья</span>
-                              <span className="text-ink-muted/50">·</span>
-                              <span>{post.date}</span>
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="relative aspect-[2/1] w-full overflow-hidden bg-dark-secondary flex-shrink-0">
-                            <Image
-                              src={post.image || '/images/cases/case-1.jpg'}
-                              alt=""
-                              fill
-                              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                              sizes="(max-width: 1024px) 100vw, 33vw"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent pointer-events-none" />
-                            <div className="absolute bottom-5 left-5">
-                              <span className="inline-block bg-orange text-white text-xs font-semibold px-3 py-1 tracking-wide">
-                                {post.category}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="p-6 flex flex-col flex-1">
-                            <h3 className="text-dark font-bold text-lg mb-3 leading-snug group-hover:text-orange transition-colors">
-                              {post.title}
-                            </h3>
-                            <p className="text-ink text-sm leading-relaxed mb-5 flex-1 line-clamp-3">{post.excerpt}</p>
-                            <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted text-xs border-t border-ink/15 pt-4">
-                              <span>Статья</span>
-                              <span className="text-ink-muted/50">·</span>
-                              <span>{post.date}</span>
-                            </div>
-                          </div>
-                        </>
-                      )}
+                  <FadeIn key={post.slug} delay={i * 0.1} className="min-h-0 flex flex-col">
+                    <Link href={`/blog/${post.slug}`} className={cardShell}>
+                      {/* Нижний пост: картинка только на мобилке; верхний — как раньше */}
+                      <div
+                        className={`relative w-full overflow-hidden bg-dark-secondary flex-shrink-0 aspect-[2/1] ${
+                          isBottom ? 'lg:hidden' : 'lg:aspect-[16/9]'
+                        }`}
+                      >
+                        <Image
+                          src={post.image || '/images/cases/case-1.jpg'}
+                          alt=""
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          sizes="(max-width: 1024px) 100vw, 33vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/20 to-transparent pointer-events-none" />
+                        <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5">
+                          <span className="inline-block bg-orange text-white text-xs font-semibold px-3 py-1 tracking-wide">
+                            {post.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div className={`p-6 flex flex-col flex-1 min-h-0 ${isBottom ? 'lg:p-6 lg:pt-6' : 'lg:p-7'}`}>
+                        {isBottom && (
+                          <span className="hidden lg:inline-block self-start bg-orange text-white text-xs font-semibold px-3 py-1 tracking-wide mb-4">
+                            {post.category}
+                          </span>
+                        )}
+                        <h3
+                          className={`text-dark font-bold leading-snug group-hover:text-orange transition-colors max-lg:line-clamp-3 ${
+                            isBottom ? 'text-base mb-2 lg:mb-2' : 'text-lg mb-3'
+                          }`}
+                        >
+                          {post.title}
+                        </h3>
+                        <p className="text-ink text-sm leading-relaxed mb-5 flex-1 min-h-0 max-lg:line-clamp-4 lg:line-clamp-none lg:text-[15px]">
+                          {post.featuredExcerpt ?? post.excerpt}
+                        </p>
+                        <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted text-xs border-t border-ink/15 pt-4">
+                          <span>Статья</span>
+                          <span className="text-ink-muted/50">·</span>
+                          <span>{post.date}</span>
+                        </div>
+                      </div>
                     </Link>
                   </FadeIn>
                 )

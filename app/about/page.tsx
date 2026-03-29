@@ -43,15 +43,16 @@ export default function AboutPage() {
         image="/images/hero-inner-a.jpg"
       />
 
-      {/* ─── FOUNDER FULL BLEED ─────────────────────────────── */}
-      <section className="bg-white">
+      {/* ─── FOUNDER ─────────────────────────────────────────── */}
+      <section className="bg-white section-padding">
         <div className="container-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh]">
-            {/* Left: Text content */}
-            <FadeIn className="flex flex-col justify-center py-20 pr-0 lg:pr-16">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-16 xl:gap-20">
+
+            {/* Текст */}
+            <FadeIn className="order-2 lg:order-1 flex flex-col flex-1 min-w-0">
               <p className="eyebrow">Об основателе</p>
-              <h2 className="text-4xl md:text-5xl font-bold text-dark leading-[1.1] mb-8">
-                Мария<br />Рудакова
+              <h2 className="text-4xl md:text-5xl font-bold text-dark leading-[1.08] mb-8">
+                Мария Рудакова
               </h2>
               <div className="space-y-4 text-dark/60 text-base leading-relaxed mb-10">
                 <p>
@@ -65,24 +66,24 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-6 mb-10">
+              {/* Статистика — плоская полоса, без card */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 border border-dark/8 mb-10 divide-x divide-dark/8">
                 {[
                   { num: '15+', label: 'лет опыта' },
                   { num: '300+', label: 'закрытых проектов' },
                   { num: '700+ млн', label: 'оспорено доначислений' },
                   { num: '24ч', label: 'реакция на запрос' },
                 ].map((s, i) => (
-                  <div key={i}>
-                    <div className="text-3xl font-bold text-orange mb-1">{s.num}</div>
-                    <div className="text-dark/40 text-sm">{s.label}</div>
+                  <div key={i} className="py-5 px-5 min-w-0">
+                    <div className="text-2xl font-bold text-orange tabular-nums mb-0.5">{s.num}</div>
+                    <div className="text-dark/45 text-xs leading-snug">{s.label}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Specializations */}
+              {/* Специализация */}
               <div className="mb-10">
-                <p className="text-dark/30 text-xs font-bold uppercase tracking-wider mb-4">Специализация</p>
+                <p className="text-dark/35 text-xs font-bold uppercase tracking-wider mb-4">Специализация</p>
                 <div className="flex flex-wrap gap-2">
                   {[
                     'Выездные налоговые проверки',
@@ -92,7 +93,10 @@ export default function AboutPage() {
                     'Налоговая реконструкция',
                     'Корпоративная медиация',
                   ].map((s, i) => (
-                    <span key={i} className="inline-flex items-center gap-2 bg-light text-dark/70 text-xs px-3 py-1.5 border-l-2 border-orange">
+                    <span
+                      key={i}
+                      className="inline-flex items-center bg-light text-dark/70 text-xs px-3 py-1.5 border-l-2 border-orange"
+                    >
                       {s}
                     </span>
                   ))}
@@ -123,20 +127,28 @@ export default function AboutPage() {
               </div>
             </FadeIn>
 
-            {/* Right: Photo — full-height, no border decoration */}
-            <FadeIn delay={0.2} direction="right" className="relative min-h-[500px] lg:min-h-0">
-              <div className="absolute inset-0 lg:relative lg:h-full">
-                <Image
-                  src="/maria-photo.webp"
-                  alt="Мария Рудакова — основатель Kailas-lab"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                />
-                {/* Subtle orange accent stripe on left edge */}
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange" />
+            {/* Фото — компактный портрет с бирюзовой левой полосой */}
+            <FadeIn
+              delay={0.1}
+              direction="right"
+              className="order-1 lg:order-2 w-full max-w-xs sm:max-w-sm mx-auto lg:mx-0 lg:w-[300px] xl:w-[320px] flex-shrink-0"
+            >
+              <div className="flex">
+                {/* Teal accent strip — тот же паттерн, что orange-left-border */}
+                <div className="w-1 flex-shrink-0 bg-orange" />
+                <div className="relative flex-1 aspect-[3/4] overflow-hidden">
+                  <Image
+                    src="/maria-founder.jpeg"
+                    alt="Мария Рудакова — основатель Kailas-lab"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 320px"
+                    priority
+                  />
+                </div>
               </div>
             </FadeIn>
+
           </div>
         </div>
       </section>

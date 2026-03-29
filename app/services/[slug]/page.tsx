@@ -84,7 +84,7 @@ export default function ServicePage({ params }: Props) {
       </section>
 
       {/* ─── SERVICES MEGA-GRID ──────────────────────────────── */}
-      <section className="section-padding bg-light pt-0">
+      <section className="bg-light pb-20 md:pb-28 pt-12 md:pt-16">
         <div className="container-xl">
           <FadeIn>
             <p className="eyebrow">Что входит</p>
@@ -93,12 +93,12 @@ export default function ServicePage({ params }: Props) {
             </h2>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5 bg-light-secondary">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5 bg-light-secondary md:items-stretch">
             {detail.services.map((serviceGroup, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div className="bg-white p-8 h-full">
+              <FadeIn key={i} delay={i * 0.08} className="h-full min-h-0">
+                <div className="bg-white p-8 md:p-9 h-full flex flex-col min-h-0">
                   <h3 className="text-dark font-bold text-lg mb-5 orange-left-border">{serviceGroup.title}</h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 flex-1">
                     {serviceGroup.items.map((item, j) => (
                       <li key={j} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-orange mt-2 flex-shrink-0" />
@@ -121,17 +121,19 @@ export default function ServicePage({ params }: Props) {
             <h2 className="section-heading text-white mb-16">Процесс работы</h2>
           </FadeIn>
 
-          <div className={`grid grid-cols-1 ${detail.process.length === 3 ? 'md:grid-cols-3' : detail.process.length === 5 ? 'md:grid-cols-5' : 'md:grid-cols-4'} gap-6`}>
+          <div
+            className={`grid grid-cols-1 ${detail.process.length === 3 ? 'md:grid-cols-3' : detail.process.length === 5 ? 'md:grid-cols-5' : 'md:grid-cols-4'} gap-6 md:items-stretch`}
+          >
             {detail.process.map((step, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="relative">
+              <FadeIn key={i} delay={i * 0.1} className="h-full min-h-0">
+                <div className="relative h-full flex flex-col min-h-0">
                   {i < detail.process.length - 1 && (
                     <div className="hidden md:block absolute top-8 left-full w-6 h-px bg-orange/30 z-10" />
                   )}
-                  <div className="bg-dark-card border border-dark-muted/30 p-6 h-full">
-                    <div className="text-orange font-bold text-4xl mb-4 opacity-40">{step.step}</div>
-                    <h3 className="text-white font-bold text-lg mb-3">{step.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
+                  <div className="bg-dark-card border border-dark-muted/30 p-6 md:p-7 h-full min-h-0 flex flex-col">
+                    <div className="text-orange font-bold text-4xl mb-4 opacity-40 shrink-0 tabular-nums">{step.step}</div>
+                    <h3 className="text-white font-bold text-lg mb-3 shrink-0">{step.title}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed flex-1 min-h-0">{step.desc}</p>
                   </div>
                 </div>
               </FadeIn>
